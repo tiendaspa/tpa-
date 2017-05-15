@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="TpaSolutionsPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>com.entity.Comentario</class>
+    <class>com.entity.Detallepreventa</class>
+    <class>com.entity.Detalleventa</class>
+    <class>com.entity.Mora</class>
+    <class>com.entity.Noticia</class>
+    <class>com.entity.Notificacion</class>
+    <class>com.entity.Preventa</class>
+    <class>com.entity.Producto</class>
+    <class>com.entity.Proveedor</class>
+    <class>com.entity.RespuestaNoticia</class>
+    <class>com.entity.SesionesCliente</class>
+    <class>com.entity.SesionesTienda</class>
+    <class>com.entity.Tienda</class>
+    <class>com.entity.Ubicaciongps</class>
+    <class>com.entity.Vendedor</class>
+    <class>com.entity.Venta</class>
+    <class>com.entity.CodigoSesion</class>
+    <class>com.entity.Cliente</class>
+    <class>com.entity.Credito</class>
+    <class>com.entity.Ingresos</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <validation-mode>NONE</validation-mode>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tpasolution?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+    </properties>
+  </persistence-unit>
+</persistence>

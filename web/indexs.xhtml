@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+   
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:j="http://xmlns.jcp.org/jsf"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <f:view contentType="text/html" ></f:view>
+    <h:head>
+        <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDdVQdxQ0l624K1pZRatnw6tQQVvkY1HFw'></script>
+       
+        <title>Login</title>
+        <style type="text/css" >
+            .form-signin{
+                margin: 0 auto;
+                max-width: 330px;
+                padding: 15px;
+            }
+            .form-regis{
+                 margin: 0 auto;
+                max-width: 330px;
+                padding: 15px;
+                
+            }
+            .form-logcliente{
+                margin: 0 auto;
+                max-width: 330px;
+                padding: 15px;
+                
+            }
+        </style>
+        <f:event type="preRenderView" listener="#{tiendaBean.clienteestrella()}"></f:event>
+    </h:head>
+    <h:body class="bod" style="padding-top: 60px; background-image: url('#{resource['/img/fondos.jpg']}'); background-size: cover">
+         <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+        show-detail="true" show-summary="false" allowDismiss="true"
+        delay="4000" escape="true" /> 
+      
+        <b:container>
+            <div id="login">
+     
+            <h:form styleClass="form-signin" prependId="false" id="form1">
+                <b:image onclick="window.location.href='newjsf.xhtml'" class="probar" style="width: 130%;margin-left: -51px;" value="/resources/img/logo.png"></b:image>
+                <b:inputText class="efecto" id="username" placeholder="Usuario" value="#{tiendaBean.tienda.usuario}" >
+                    <f:facet name="prepend" >
+                        <b:iconAwesome name="user"></b:iconAwesome>
+                    </f:facet>
+                </b:inputText>
+                <b:inputText class="efecto" id="password" placeholder="Contraseña" type="password" value="#{tiendaBean.tienda.contraseña}">
+                    <f:facet name="prepend" >
+                        <b:iconAwesome name="key">
+                            
+                        </b:iconAwesome>
+                    </f:facet>
+                    
+                </b:inputText>
+              
+                
+                <b:commandButton look="primary btn-block" value="Ingresar" icon="new-window" id="btn-1" action="#{tiendaBean.iniciarSesion()}"></b:commandButton>
+                <b:commandButton type="button" look="info btn-block" icon="list-alt" value="Registrate" id="btn-2"></b:commandButton>
+                <b:commandButton type="button" style="color: #1678c2;" id="btncliente" look="link" value="Poseo un codigo de cliente MODIFICACION"></b:commandButton>
+            </h:form>
+               
+                <b:alert class="msgerror" closable="true"  style="width: 40%; margin: auto;" rendered="#{tiendaBean.mostraerror}" severity="danger"><strong>Usuario no encontrado!</strong> Por favor verifique sus datos.    </b:alert>
+            </div>
+            
+            <div id="registro">
+                <h:form styleClass="form-regis">
+                     <h2 class="form-signin-heading" style="font-style: italic;">Registra tu tienda</h2>
+                    <b:row>
+                        <b:inputText value="#{tiendaBean.tienda.nombretienda}" large-screen="full-width" placeholder="Nombre de tienda" >
+                          <f:facet name="prepend" >
+                              <b:iconAwesome name="home"></b:iconAwesome>
+                          </f:facet>
+                        </b:inputText>
+                        <b:inputText value="#{tiendaBean.tienda.propietario}" large-screen="full-width" placeholder="Propietario" >
+                          <f:facet name="prepend" >
+                              <b:iconAwesome name="user"></b:iconAwesome>
+                          </f:facet>
+                        </b:inputText>
+                        <b:inputText value="#{tiendaBean.tienda.cedulapropietario}" large-screen="full-width" placeholder="Cedula" >
+                          <f:facet name="prepend" >
+                              <b:iconAwesome name="barcode"></b:iconAwesome>
+                          </f:facet>
+                        </b:inputText>
+                        <b:inputText value="#{tiendaBean.tienda.telefono}" large-screen="full-width" placeholder="Telefono" >
+                          <f:facet name="prepend" >
+                              <b:iconAwesome name="phone"></b:iconAwesome>
+                              
+                          </f:facet>
+                        </b:inputText>
+                        <b:inputText value="#{tiendaBean.tienda.direccion}" large-screen="full-width" placeholder="Direccion" >
+                          <f:facet name="prepend" >
+                              <b:iconAwesome name="map-marker"></b:iconAwesome>
+                              
+                          </f:facet>
+                        </b:inputText>
+                        <b:inputText value="#{tiendaBean.tienda.usuario}" large-screen="full-width" placeholder="Usuario" >
+                          <f:facet name="prepend" >
+                              <b:iconAwesome name="user"></b:iconAwesome>
+                              
+                          </f:facet>
+                        </b:inputText>
+                        <b:inputSecret value="#{tiendaBean.password}" large-screen="full-width" placeholder="Contraseña" >
+                          <f:facet name="prepend" >
+                              <b:iconAwesome name="lock"></b:iconAwesome>
+                              
+                          </f:facet>
+                        </b:inputSecret>
+                        
+                        
+                    </b:row>
+                    
+                    <b:commandButton actionListener="#{tiendaBean.registrar()}" look="primary btn-block" value="Registrar" iconAwesome="ok" id="btn-4"></b:commandButton>
+                    <b:commandButton type="submit" look="info btn-block"  value="Regresar" id="btn-3"></b:commandButton>
+                    
+                </h:form>
+            </div>
+            <div id="logincliente">
+                <h:form styleClass="form-signin" prependId="false" id="form2">
+                <h2 class="form-signin-heading" style="font-style: italic;">Ingresa tus datos</h2>
+                <b:inputText  placeholder="Usuario" value="#{usuarioBean.cliente.usuario}" >
+                    <f:facet name="prepend" >
+                        <b:iconAwesome name="user"></b:iconAwesome>
+                    </f:facet>
+                </b:inputText>
+                <b:inputText  placeholder="Contraseña" type="password" value="#{usuarioBean.cliente.contrasena}">
+                    <f:facet name="prepend" >
+                        <b:iconAwesome name="key">
+                            
+                        </b:iconAwesome>
+                    </f:facet>
+                    
+                </b:inputText>
+              
+                
+                <b:commandButton look="primary btn-block" value="Ingresar" iconAwesome="Log-in"  action="#{usuarioBean.iniciarSesionUser()}"></b:commandButton>
+                </h:form>
+                <b:panel style="background: transparent" styleClass="form-logcliente" look="danger" title="Ingresa tu codigo" collapsed="true">
+                    <h:form styleClass="form-logcliente">
+                        <b:inputText  large-screen="full-width" placeholder="Digita tu codigo" value="#{usuarioBean.codigoSesion.cod}" >
+                               <f:facet name="prepend" >
+                                   <b:iconAwesome name="barcode"></b:iconAwesome>
+
+                               </f:facet>
+                        </b:inputText>
+                         <b:commandButton look="primary btn-block" value="Ingresar" icon="ok" id="btn-4" action="#{usuarioBean.iniciarSesion()}"></b:commandButton>
+                         <b:commandButton type="submit" look="info btn-block"  value="Regresar" id="btn-6"></b:commandButton>
+                    </h:form>
+                </b:panel>    
+            </div>
+          
+          
+            <style>
+                .stars{
+                    background: transparent;
+                }
+                    .stars:hover{
+                        background: #ffffff;
+                    }
+                </style>
+         
+        </b:container>
+       <script>
+           $(document).ready(function(){
+                $('.probar').fadeIn("50000");
+                $("#logincliente").hide();
+                
+                $("#registro").hide();
+                $("#btn-2").click(function(){
+                    $("#login").hide();
+                    $("#registro").show();
+                });
+                $("#btn-3").click(function(){
+     
+                    $("#login").show();
+                    $("#registro").hide();
+                });
+                $("#btncliente").click(function(){
+                    $("#logincliente").show();
+                    $("#login").hide();
+                });
+                $("#btn-6").click(function(){
+                    $("#logincliente").hide();
+                    $("#login").show();
+                });
+                $('.efecto').click(function(){
+                   $('.estrella').animate({
+                    opacity: .5,
+  height: "50%"
+                }); 
+                });
+      
+                
+               
+           } );
+           
+        </script>
+    </h:body>
+</html>
+

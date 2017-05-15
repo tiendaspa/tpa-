@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Inicio</title>
+         <f:event type="preRenderView" listener="#{templateValidate.verificar()}"></f:event>
+    
+      <!--   <style>
+             #fondo-radial {
+    background-position: center center;
+    background: radial-gradient(circle,#000000, white);
+}
+         </style>-->
+    </h:head>
+
+    <h:body id="fondo-radial">
+
+        <div id="top" class="top">
+            <ui:insert name="top">
+                <b:navBar style="border-radius: 0px;" brand="TpaSolutions" brandHref="tpasolution.xhtml">
+                        <b:navbarLinks>
+                            <b:navLink value="Clientes" iconAwesome="user" href="cliente.xhtml"></b:navLink>
+                            <b:navLink value="Productos" iconAwesome="apple" href="producto.xhtml"></b:navLink>
+                            <b:navLink value="Ventas" icon-awesome="usd" href="venta.xhtml"></b:navLink>
+                            <b:navLink value="Proveedor" icon-awesome="shopping-cart" href="#"></b:navLink>
+                            <b:navLink id="coment" value="Ver comentarios " icon-awesome="globe" iconAlign="right" href="comentario.xhtml"> <b:badge id="notify" value="#{clienteBean.numero}"
+                                           tooltip="Tienes #{clienteBean.numero} mensajes por revisar" style="#{clienteBean.style()}" tooltip-position="left"
+/>      </b:navLink>
+                            <b:navLink value="Pedidos en linea" href="pedidos.xhtml"></b:navLink>
+                          
+                        </b:navbarLinks>
+                            <h:form>
+                                <b:commandButton style="float: right" look="link" value="Cerrar sesion" actionListener="#{tiendaBean.cerrarsesion()}" action="/index?faces-redirect=true"></b:commandButton>
+                            </h:form>
+                    </b:navBar>
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#coment").click(function(){
+                  $("#notify").hide();
+                });
+            });
+        </script>
+    </h:body>
+
+</html>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDdVQdxQ0l624K1pZRatnw6tQQVvkY1HFw'></script>
+        <f:event type="preRenderView" listener="#{ubicaciongpsBean.listarmap()}"></f:event>
+    </h:head>
+    <h:body>
+        <h:form id="frm">  
+            <p:gmap id="gmap" center="#{tiendaBean.latitud},#{tiendaBean.longuitud}" zoom="20" type="ROADMAP" model="#{ubicaciongpsBean.advancedModel}" style="width:100%;height:400px">
+ 
+        <p:ajax event="overlaySelect" listener="#{ubicaciongpsBean.onMarkerSelect}" />
+ 
+        <p:gmapInfoWindow id="infoWindow">
+            <p:outputPanel style="text-align: center; display: block; margin: auto">
+                <p:graphicImage name="https://www.primefaces.org/showcase/javax.faces.resource/demo/images/antalya/#{ubicaciongpsBean.marker.data}" height="150" />
+                    <br/>
+                    <h:outputText value="#{ubicaciongpsBean.marker.title}" />
+            </p:outputPanel>
+        </p:gmapInfoWindow>
+        
+       
+    </p:gmap>
+</h:form>
+        <h:form>
+            <h:selectOneMenu value="#{tiendaBean.tienda.idTienda}" > 
+                                        <f:selectItem noSelectionOption="true" itemLabel="Selecciona" itemValue="#{null}"></f:selectItem>
+                                        <f:selectItems value="#{tiendaBean.listartienda()}" var="prove"  itemValue="#{prove.idTienda}"></f:selectItems>
+                                        
+                                    </h:selectOneMenu>
+            <p:commandButton value="pro" actionListener="#{tiendaBean.probando()}" update=":frm"></p:commandButton>
+        </h:form>
+        <h:outputLabel id="text" value="#{tiendaBean.ts.nombretienda}"></h:outputLabel>
+    </h:body>
+</html>

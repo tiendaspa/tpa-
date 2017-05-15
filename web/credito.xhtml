@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<h:head>
+	<title>Credito</title>
+	<!-- Bootstrap core CSS -->
+
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/dist/css/AdminLTE.min.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/dist/css/skins/skin-blue.min.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+
+    <f:event type="preRenderView" listener="#{templateValidate.verificar()}"></f:event>
+       <f:event type="preRenderView" listener="#{debitoBean.listarcredito()}"></f:event>
+
+
+
+
+</h:head>
+<h:body class="hold-transition skin-blue sidebar-mini">
+	
+	 <div class="wrapper">
+
+      <!-- Main Header -->
+      <header class="main-header">
+
+        <!-- Logo -->
+        <a href="index2.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>T</b>PA</span>
+          <!-- logo for regular state and mobile devices -->
+            <b:image onclick="window.location.href='tpasolution1.xhtml'"   tooltip="Hola, #{tiendaBean.hello}" tooltipPosition="right" class="probar" style="width: 100%; cursor: pointer;" value="/resources/public/logo.png"></b:image>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Messages: style can be found in dropdown.less-->
+              <li class="dropdown messages-menu">
+                <!-- Menu toggle button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="label label-success">#{clienteBean.numero}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">Tu tienes #{clienteBean.numero} mensajes.</li>
+                  <li>
+                    <!-- inner menu: contains the messages -->
+                    <ul class="menu">
+                      <li><!-- start message -->
+                        <a href="#">
+                          <div class="pull-left">
+                            <!-- User Image -->
+                            <b:image value="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/shop-icon.png"></b:image>
+                          </div>
+                          <!-- Message title and timestamp -->
+                          <h4>
+                            #{tiendaBean.hello}
+                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                          </h4>
+                          <!-- The message -->
+                          <p>Why not buy a new awesome theme?</p>
+                        </a>
+                      </li><!-- end message -->
+                    </ul><!-- /.menu -->
+                  </li>
+                  <li class="footer"><a href="comentario.xhtml">Ver todos los mensajes.</a></li>
+                </ul>
+              </li><!-- /.messages-menu -->
+
+              <!-- Notifications Menu -->
+              <li class="dropdown notifications-menu">
+                <!-- Menu toggle button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="label label-warning">#{tiendaBean.listapre.size()}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">Tienes #{tiendaBean.listapre.size()} pedidos.</li>
+                  <li>
+                    <!-- Inner Menu: contains the notifications -->
+                    <ul class="menu">
+                      <li><!-- start notification -->
+                        <a href="#">
+                            <b:image rendered="#{tiendaBean.listapre.size() > 0}" value="https://lh4.googleusercontent.com/-1gWUzBU_mOU/Uu1Dw6Hz7hI/AAAAAAAAGXc/XCLpc7cEaUs/s256/shopping-basket-add-icon.png"></b:image>
+                            <b:image rendered="#{tiendaBean.listapre.size() == 0}" value="http://www.dk-thaishop.com/image/c4.png"></b:image>
+                        </a>
+                      </li><!-- end notification -->
+                    </ul>
+                  </li>
+                  <li class="footer"><a href="pedidos.xhtml">Ver todos</a></li>
+                </ul>
+              </li>
+              <!-- Tasks Menu -->
+              <li class="dropdown tasks-menu">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-flag-o"></i>
+                  <span class="label label-danger">9</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">You have 9 tasks</li>
+                  <li>
+                    <!-- Inner menu: contains the tasks -->
+                    <ul class="menu">
+                      <li><!-- Task item -->
+                        <a href="#">
+                          <!-- Task title and progress text -->
+                          <h3>
+                            Design some buttons
+                            <small class="pull-right">20%</small>
+                          </h3>
+                          <!-- The progress bar -->
+                          <div class="progress xs">
+                            <!-- Change the css width attribute to simulate progress -->
+                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">20% Complete</span>
+                            </div>
+                          </div>
+                        </a>
+                      </li><!-- end task item -->
+                    </ul>
+                  </li>
+                  <li class="footer">
+                    <a href="#">View all tasks</a>
+                  </li>
+                </ul>
+              </li>
+              <!-- User Account Menu -->
+              <li class="dropdown user user-menu">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <!-- The user image in the navbar-->
+                  <b:image style="width: 14px;" value="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/shop-icon.png"></b:image>
+                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                  <span class="hidden-xs">#{tiendaBean.hello}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- The user image in the menu -->
+                  <li class="user-header">
+                      <b:image value="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/shop-icon.png"></b:image>
+                    <p>
+                      #{tiendaBean.hello}
+                      <small>TpaSolutions!</small>
+                      <small><b:label severity="info" text="#{tiendaBean.ingresos}"></b:label></small>
+                    </p>
+                   
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="col-xs-4 text-center">
+                      <a href="cliente.xhtml"><b:icon name="user"></b:icon>Clientes</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                      <a href="productos_2.xhtml"><b:icon name="apple"></b:icon>Productos</a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                         <a href="proveedor.xhtml"><b:icon name="shopping-cart"></b:icon>Proveedores</a>
+                    </div>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                        <b:button value="Inicio" icon="home" look="primary" outcome="tpasolution.xhtml"></b:button>
+                    </div>
+                    <div class="pull-right">
+                            <h:form>
+                          <b:commandButton iconAwesome="remove" look="danger" value="Salir" actionListener="#{tiendaBean.cerrarsesion()}" action="/index?faces-redirect=true"></b:commandButton>
+       </h:form> 
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+              <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel">
+            <div class="pull-left image">
+                <b:image value="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/shop-icon.png"></b:image>
+            </div>
+            <div class="pull-left info">
+                <p>#{tiendaBean.hello}</p>
+              <!-- Status -->
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+
+          <!-- search form (Optional) -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search..."/>
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">
+            <li class="header">HEADER</li>
+            <!-- Optionally, you can add icons to the links -->
+            <li class="active"><a href="venta.xhtml"><i class="fa fa-link"></i><b:iconAwesome name=""></b:iconAwesome> <span>Ventas</span></a></li>
+            <li><a href="credito.xhtml"><i class="fa fa-link"></i> <span>Créditos</span></a></li>
+            <li class="treeview">
+              <a href="#"><i class="fa fa-link"></i> <span>Más...</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#">Link in level 2</a></li>
+                <li><a href="#">Link in level 2</a></li>
+              </ul>
+            </li>
+          </ul><!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+       
+        <section class="content-header">
+          
+            <b:label  severity="success" text="#{tiendaBean.hello}" tooltip="Tienda"></b:label>
+             
+        </section>
+        <section class="content">
+             <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom" placementAlign="left"
+        show-detail="true" show-summary="false" allowDismiss="true"
+        escape="true"  icon="globe" delay="4000" style="background: transparent; " />      
+            <h:form>
+                <p:poll async="true" interval="3" listener="#{tiendaBean.listpreventas()}" update=":growlMsg"></p:poll>
+            </h:form>      
+              <h1>Moras</h1>
+                    <hr/>
+                    <b:row styleClass="placeholders">
+                        <b:carousel id="parque">
+                            <c:forEach items="#{debitoBean.listadebitos}" var="deb">
+                               
+                                <b:carouselItem >
+                                 
+                                    <b:column  col-md="4" styleClass="placeholder">
+                               <h3>Detalle de compra</h3>
+                               <p>Estado: #{deb.estado}</p>
+                               <p>Fecha de la venta: #{deb.fechacredito}</p>
+                            </b:column>
+                                    <b:column col-md="4" styleClass="placeholder">
+                                            <b:image style="width: 50%; height: 200px;" value="/resources/img/img_cliente/#{deb.cliente.img}"></b:image>
+                                    </b:column>
+                                    <b:column col-md="4" styleClass="placeholder">
+                                        <b:button style="margin-top: 130px;"  look="warning" value="ver más" iconAwesome="search"></b:button>
+                                    </b:column>
+                                   
+                            </b:carouselItem>
+                   
+                            </c:forEach>
+                         </b:carousel>
+                     
+                        
+                    </b:row>
+                  
+                    <b:row styleClass="table-responsive">
+                        <b:container rendered="#{debitoBean.mostrarcreditos}">
+                              <h3>Pendientes</h3>
+                    <hr/>
+                              <h:form>
+                            <b:dataTable value="#{debitoBean.listadebitos}" var="debito" lang="es" responsive="true" >
+                             
+                                <b:dataTableColumn label="Imagen de cliente">
+                                        <b:image style="width: 10%;" value="/resources/img/img_cliente/#{debito.cliente.img}"></b:image>
+                                    </b:dataTableColumn>
+                                <b:dataTableColumn label="Fecha de pago" value="#{debito.fechapago}">
+                                    </b:dataTableColumn>
+                                <b:dataTableColumn value="#{debito.cliente.nombre}"></b:dataTableColumn>
+                                    
+                                <b:dataTableColumn label="más info..." labelStyle="color: red;">
+                                            <b:commandButton look="warning" value="Ver detalles" actionListener="#{debitoBean.ver(debito.venta, debito.venta.id, debito.venta.fecha,debito.total,debito)}"></b:commandButton>
+                                    </b:dataTableColumn>
+                                <b:dataTableColumn label="Reportar">
+                         
+                                    <b:commandButton rendered="#{debito.fechapago.compareTo(debitoBean.fecha)>0  eq false}" value="Reportar" look="danger" actionListener="#{debitoBean.reportar(debito.cliente,debito)}"></b:commandButton>
+                                   
+                                </b:dataTableColumn>
+                                <b:dataTableColumn label="Recordar">
+                                    <b:commandButton value="Enviar recordatorio"  look="info" iconAwesome="info-sign" actionListener="#{debitoBean.recordar(debito.cliente, debito)}"></b:commandButton>
+                                </b:dataTableColumn>
+                                
+                                
+                            </b:dataTable>
+                            </h:form>
+                  
+                        </b:container>
+                        <b:container id="panelmora" rendered="#{debitoBean.panelmora}">
+                            <h:form>
+                            <b:column col-md="6"> 
+                               <b:thumbnail>
+                                   <b:image style="height: 400px;" rendered="#{debitoBean.clientereportar.img != null}" value="/resources/img/img_cliente/#{debitoBean.clientereportar.img}" alt="Generic placeholder thumbnail"/>
+            <f:facet name="caption">
+                <h3>#{debitoBean.clientereportar.nombre} </h3>
+                <p><strong>Dirección: </strong>#{debitoBean.clientereportar.direccion}</p>
+                <p><strong>Telefono: </strong>#{debitoBean.clientereportar.telefono}</p>
+                <p>
+                    <b:inputTextarea value="#{debitoBean.moracliente.descripción}" placeholder="describa los motivos" ></b:inputTextarea>
+                    <b:commandButton value="reportar" look="primary" actionListener="#{debitoBean.reportarcliente()}"></b:commandButton>
+                 
+                </p>
+            </f:facet>
+        </b:thumbnail>
+                           
+                                
+                          
+                            </b:column>
+                            <b:column col-md="4">
+                                <b:image value="/resources/img/utilidades/deuda.png"></b:image>
+                            </b:column>
+                            
+                            </h:form>
+                        </b:container>
+                        <b:container  rendered="#{debitoBean.mostrardetalles}">
+                          
+                            <div class="mostrardetail">
+                                
+                            <h1>Productos comprados</h1>  <b:button class="btnabonar"   style="float: right;" value="Abonar" iconAwesome="credit-card" look="success"></b:button>
+                                    <hr/>
+                                    <h2>Datos venta:</h2>
+                                    <p>Fecha: #{debitoBean.ventadatos.fecha}</p>
+                                    <p>Fecha limite:  #{debitoBean.debito.fechapago}</p>
+                                  
+                            <b:column col-md="8" >
+                               
+
+                                <c:forEach items="#{debitoBean.listadetalleventa}" var="detalle">
+                                    <b:column col-md="4">
+
+                                        <b:panel title="Producto" collapsible="false">
+
+                                            <b:image style="width: 100%; height: 200px;" value="/resources/img/img_tienda/#{detalle.producto.img}"></b:image>
+                                            <p>#{detalle.cantidad}</p>
+                                        </b:panel>
+
+                                    </b:column>
+
+
+                                </c:forEach>
+                                   
+                            </b:column>
+                                    
+                                        <b:column col-md="2">
+                                         <b:image style="float: right;" value="/resources/img/utilidades/canasta.png"></b:image>
+                                        </b:column>
+                                  
+                                    
+                     
+                            </div>
+                            <h:form>
+                                        <b:commandButton look="link" value="regresar" actionListener="#{debitoBean.ocultardetalles()}"></b:commandButton>
+                                    </h:form>
+                            <h:form>
+                              <b:panel class="panelabonar" title="Abonar" look="warning" collapsible="false">
+                                  <b:column col-md="8">
+                                      <h4>Total de la mora: <h4 style="color: red"><strong>#{debitoBean.totaldeuda}</strong></h4></h4>
+                                      <b:inputText value="#{debitoBean.valorabono}" placeholder="digite valor abono"> <f:facet name="prepend" >
+                              <b:iconAwesome name="usd"></b:iconAwesome>
+                              
+                              
+                                          </f:facet></b:inputText><p></p>
+                                          <b:commandButton look="success" icon="piggy-bank" value="Abobar" actionListener="#{debitoBean.abonar()}" />
+                                  </b:column>
+                                  <b:column col-md="4">
+                                      <b:image style="height: 300px;" value="/resources/img/utilidades/pagar.png"></b:image>
+                                  </b:column>
+                                  <f:facet name="footer">
+                                      <b:label text="#{tiendaBean.hello}"></b:label>
+    </f:facet>
+                                    </b:panel>
+                            </h:form>
+                        
+                        </b:container>
+                        
+                            
+
+                    </b:row>
+                            <script>
+                    $(document).ready(function(){
+                     
+                        $('.panelabonar').hide();
+                        $('.btnabonar').click(function(){
+                              $('.panelabonar').show();
+                              $('.mostrardetail').hide();
+                        });
+                        
+                    });
+                    
+                </script>
+
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+
+      <!-- Main Footer -->
+      <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+          Anything you want
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright 2015 <a href="#">Company</a>.</strong> All rights reserved.
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+          <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+          <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <!-- Home tab content -->
+          <div class="tab-pane active" id="control-sidebar-home-tab">
+            <h3 class="control-sidebar-heading">Recent Activity</h3>
+            <ul class="control-sidebar-menu">
+              <li>
+                <a href="javascript::;">
+                  <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                    <p>Will be 23 on April 24th</p>
+                  </div>
+                </a>
+              </li>
+            </ul><!-- /.control-sidebar-menu -->
+
+            <h3 class="control-sidebar-heading">Tasks Progress</h3>
+            <ul class="control-sidebar-menu">
+              <li>
+                <a href="javascript::;">
+                  <h4 class="control-sidebar-subheading">
+                    Custom Template Design
+                    <span class="label label-danger pull-right">70%</span>
+                  </h4>
+                  <div class="progress progress-xxs">
+                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                  </div>
+                </a>
+              </li>
+            </ul><!-- /.control-sidebar-menu -->
+
+          </div><!-- /.tab-pane -->
+          <!-- Stats tab content -->
+          <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div><!-- /.tab-pane -->
+          <!-- Settings tab content -->
+          <div class="tab-pane" id="control-sidebar-settings-tab">
+            <form method="post">
+              <h3 class="control-sidebar-heading">General Settings</h3>
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Report panel usage
+                  <input type="checkbox" class="pull-right" />
+                </label>
+                <p>
+                      
+                </p>
+              </div><!-- /.form-group -->
+            </form>
+          </div><!-- /.tab-pane -->
+        </div>
+      </aside><!-- /.control-sidebar -->
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+    </div><!-- ./wrapper -->
+
+    <!-- REQUIRED JS SCRIPTS -->
+
+	
+	
+	
+	<script type="text/javascript" src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script> <!-- Correio -->
+	<script type="text/javascript" src="#{request.contextPath}/resources/dist/js/app.min.js"></script> <!-- Correio -->
+
+
+
+</h:body>
+
+</html>
+
+
+
+

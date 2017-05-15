@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+      <title>Usuario</title>
+        <f:event type="preRenderView" listener="#{templateValidate.verificarcliente()}"></f:event>
+         
+    </h:head>
+
+    <h:body>
+      
+        <div id="top" class="top">
+            <ui:insert name="top">
+               <b:navBar style="border-radius: 0px;" brand="TpaSolutions" brandHref="usuario.xhtml">
+     <b:navbarLinks>
+         <b:navLink value="Compras en linea" iconAwesome="usd" href="#"></b:navLink>
+         <b:navLink value="Galeria" iconAwesome="photo" href="#"></b:navLink>
+         
+     </b:navbarLinks>
+   
+     <!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
+     <b:navbarLinks pull="right" style="margin-top: -10px;">
+     <h:panelGrid style="float: right" columns="2"> 
+         
+         <b:navbarLinks pull="right"><b:navLink value="    " href="#"><b:image style="width: 40px ;height: 40px ; border-radius: 50%;" value="/resources/img/img_cliente/#{usuarioBean.cliente.img}" ></b:image></b:navLink></b:navbarLinks>
+   
+     <b:navbarLinks pull="right" styleClass="hidden-xs">
+       
+           
+         
+    <b:dropMenu value="#{usuarioBean.cliente.nombre} #{usuarioBean.cliente.apellido}">
+       
+       <h:form>
+           <b:navCommandLink iconAwesome="remove" value="Salir" actionListener="#{usuarioBean.cerrarsesion()}" action="/index?faces-redirect=true"></b:navCommandLink>
+       </h:form> 
+    </b:dropMenu>
+           
+     </b:navbarLinks>
+     </h:panelGrid>
+     </b:navbarLinks>
+ </b:navBar> 
+               
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

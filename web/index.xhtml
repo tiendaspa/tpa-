@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+    <head jsf:id="head">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+        <title>TpaSolutions!</title>pp
+        <script src="#{resource['public/semantic/components/form.js']}"></script>
+        <script src="#{resource['public/semantic/components/transition.js']}"></script>
+        <link type="text/css" rel="stylesheet" href="#{resource['public/css/estilos.css']}"/>
+        <link type="text/css" rel="stylesheet" href="#{resource['public/css/animate.css']}"/>
+        <link type="text/css" rel="stylesheet" href="#{resource['public/semantic/semantic.min.css']}"/>
+        <script type="text/javascript" src="#{resource['public/jscript/jquery-2.2.3.min.js']}"></script>
+        <script type="text/javascript" src="#{resource['public/jscript/main.js']}"></script>
+        <script type="text/javascript" src="#{resource['public/semantic/semantic.min.js']}"></script>
+        <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet"/>
+         <style type="text/css" >
+          body {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url("#{tiendaBean.imgInicio}"); 
+            overflow: hidden;
+          }
+
+          body > .grid {
+            height: 100%;
+          }
+          .image {
+            margin-top: -100px;
+          }
+          .column {
+            max-width: 450px;
+          }
+        </style>
+
+    </head>
+    <body jsf:id="body">
+        <div class="ui middle aligned center aligned grid animated zoomIn" id="tienda" style="display: #{tiendaBean.displayTienda}">
+  <div class="column">
+    <h2 class="ui teal image header">
+      <div class="content" style="color: black">
+        <img src="#{resource['public/logo.png']}" />
+      </div>
+    </h2>
+      <form class="ui large form" jsf:id="frm1" method="POST">
+      <div class="ui stacked segment" id="cuadro">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" id="email" placeholder="Ingresa tu usuario"  jsf:value="#{tiendaBean.tienda.usuario}"/>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" id="password" placeholder="Ingresa tu contraseña" jsf:value="#{tiendaBean.tienda.contraseña}"/>
+          </div>
+        </div>
+          <input type="submit" class="ui fluid large primary submit button"  value="Ingresar" jsf:action="#{tiendaBean.iniciarSesion()}"/>
+      </div>
+
+      <div class="ui error message"></div>
+      <div style="display: #{tiendaBean.msjErrorTienda} ; font-size: 13px">
+      <div class="ui orange message" id="msj_error" >
+          <i class="close icon" onclick="#{tiendaBean.msjErrorT()}"></i>
+          <div class="header">
+              El usuario ingresado no ha sido encontrado
+          </div>
+          <p>Por favor haga verificación de los datos</p>
+      </div>
+      </div>
+    </form>
+
+    <div class="ui message">
+        ¿Aún no estás registrado? <a id="pass" href="#" onclick="$('.ui.modal').modal()">Regístrate ahora</a><br/>
+        <a id="pass" href="http://localhost:8084/TpaSolutions/faces/newjsf.xhtml">¿Quiénes tiene TPASolutions?</a> <a id="pass" href="http://localhost:8084/TpaSolutions/faces/prueba.xhtml">Encuentra tu producto</a>
+    </div>
+    <button class="circular ui icon button" onclick="document.getElementById('inicio').style.display = 'flex' ; document.body.style.backgroundImage='url(#{resource['public/fondoPrincipal.jpg']})'; document.getElementById('tienda').style.display = 'none' ">
+      <i class="arrow left icon"></i>
+    </button>
+  </div>
+</div>
+        
+  <div class="ui middle aligned center aligned grid animated zoomIn" id="cliente" style="display: #{tiendaBean.displayCliente}">
+  <div class="column">
+    <h2 class="ui teal image header">
+      <div class="content" style="color: black">
+        <img src="#{resource['public/logo.png']}" />
+        <!--<h1 id="title" style="font-family: Fredoka One ; font-size: 50px">TaskQuick!</h1> -->
+      </div>
+    </h2>
+      <form class="ui large form" jsf:id="formulario2" method="POST">
+      <div class="ui stacked segment" id="cuadro">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" id="email" placeholder="Ingresa tu usuario" jsf:value="#{usuarioBean.cliente.usuario}"/>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" id="password" placeholder="Ingresa tu contraseña" jsf:value="#{usuarioBean.cliente.contrasena}"/>
+          </div>
+        </div>
+         <input type="submit" class="ui fluid large primary submit button" jsf:action="#{usuarioBean.iniciarSesionUser_Original()}" value="Ingresar" />
+      </div>
+
+      <div class="ui error message"></div>
+      <div style="display: #{tiendaBean.msjErrorCliente} ; font-size: 13px">
+      <div class="ui orange message" id="msj_error" >
+          <i class="close icon" onclick="#{usuarioBean.msjErrorC()}"></i>
+          <div class="header">
+              El usuario ingresado no ha sido encontrado
+          </div>
+          <p>Por favor haga verificación de los datos</p>
+      </div>
+      </div>
+     
+      <div style="display: #{tiendaBean.msjSesion} ; font-size: 13px">
+      <div class="ui blue message" id="msj_error" >
+          <i class="close icon" onclick="#{usuarioBean.msjSesion()}"></i>
+          <div class="header">
+              Este usuario tiene una sesión ya iniciada
+          </div>
+          <p>Si tiene problemas comuniquese con nosostros a tiendaspa2015@hotmail.com</p>
+      </div>
+      </div>
+
+    </form>
+    <div class="ui message">
+        ¿Aún no estás registrado? <a id="pass" onclick="document.getElementById('codigo').style.display = 'block'" href="#"> Ingresa tu código</a>
+    </div>
+      
+      <div id="codigo" style="display: none">
+           <form method="POST" jsf:id="form3">
+          <div class="ui right labeled left icon input">
+  <i class="credit card alternative icon icon"></i>
+  <input type="text" placeholder="Ingresar código" jsf:value="#{usuarioBean.codigoSesion.cod}"/>
+  <button class="ui tag blue label" jsf:action="#{usuarioBean.iniciarSesion()}">
+    Aceptar
+  </button>
+</div>
+       
+       <i class="remove circle icon red" onclick="document.getElementById('codigo').style.display = 'none' ;"></i>
+           </form><br/><br/>
+       </div>
+
+    <button class="circular ui icon button" onclick="document.getElementById('inicio').style.display = 'flex' ; document.body.style.backgroundImage='url(#{resource['public/fondoPrincipal.jpg']})'; document.getElementById('cliente').style.display = 'none' ">
+      <i class="arrow left icon"></i>
+    </button>
+  </div>
+</div>  
+        <div class="ui middle aligned center aligned grid animated zoomInDown" id="inicio" style="display: #{tiendaBean.displayInicio}">
+  <div class="column">
+    <h2 class="ui teal image header">
+      <div class="content" style="color: black">
+        <img src="#{resource['public/logo.png']}" />
+      </div>
+    </h2>
+      <div class="ui stacked " id="cuadro">
+          <div jsf:id="div1" class="ui fluid large orange submit button" onclick="document.getElementById('tienda').style.display = 'flex' ;  document.body.style.backgroundImage='url(#{resource['public/fondoTienda.jpg']})'; document.getElementById('inicio').style.display = 'none' "><i class="shopping basket icon"></i>Inicio de sesión como Tienda</div><br/>
+        <div class="ui fluid large primary submit button" onclick="document.getElementById('cliente').style.display = 'flex' ; document.body.style.backgroundImage='url(#{resource['public/fondoCliente.jpg']})' ;document.getElementById('inicio').style.display = 'none'"><i class="icon user"></i>Inicio de sesión como Cliente</div>
+      </div>
+  </div>
+  </div>   
+        
+
+        <div class="ui modal small" style="margin-top: -78.5px; ">
+    <div class="header">
+      Registra tu tienda
+    </div>
+    <div class="content">
+      
+        <form class="ui large form pruebaFrm" jsf:id="frmReg" method="POST">
+      <div class="ui stacked segment" id="cuadro">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="home icon"></i>
+            <input type="tienda" name="tienda" placeholder="Nombre de tienda" jsf:value="#{tiendaBean.tienda.nombretienda}"/>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="child icon"></i>
+            <input type="prop" name="prop" placeholder="Propietario" jsf:value="#{tiendaBean.tienda.propietario}"/>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="browser icon"></i>
+            <input type="cedu" name="cedu" placeholder="Cédula" jsf:value="#{tiendaBean.tienda.cedulapropietario}"/>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="phone icon"></i>
+            <input type="tel" name="tel" placeholder="Teléfono" jsf:value="#{tiendaBean.tienda.telefono}"/>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="marker icon"></i>
+            <input type="dir" name="dir" placeholder="Dirección" jsf:value="#{tiendaBean.tienda.direccion}"/>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="usuar" name="usuar" placeholder="Usuario" jsf:value="#{tiendaBean.tienda.usuario}"/>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="contra" name="contra" placeholder="Contraseña" jsf:value="#{tiendaBean.password}"/>
+          </div>
+        </div>
+          <input type="submit" class="ui fluid large primary submit button"  value="Ingresar" jsf:action="#{tiendaBean.registrar()}"/>
+      </div>
+
+
+
+    </form>
+        
+        
+    </div>
+
+  </div>
+        
+        
+    </body>
+</html>
+

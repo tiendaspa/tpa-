@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Facelet Title</title>
+         <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDdVQdxQ0l624K1pZRatnw6tQQVvkY1HFw'></script>
+       
+    </h:head>
+    <h:body>
+    <h:form id="frm">  
+        <p:gmap id="gmap" center="10.3787604,-75.4799184" zoom="15" type="ROADMAP" model="#{ubicaciongpsBean.product}" style="width:100%;height:400px">
+ 
+        <p:ajax event="overlaySelect" listener="#{ubicaciongpsBean.onMarkerSelect}" />
+ 
+        <p:gmapInfoWindow id="infoWindow">
+            <p:outputPanel style="text-align: center; display: block; margin: auto">
+                <p:graphicImage name="https://www.primefaces.org/showcase/javax.faces.resource/demo/images/antalya/#{ubicaciongpsBean.marker1.data}" height="150" />
+                    <br/>
+                    <h:outputText value="#{ubicaciongpsBean.marker1.title}" />
+            </p:outputPanel>
+        </p:gmapInfoWindow>
+        
+       
+    </p:gmap>
+        <h:form id="form">
+            <b:inputText id="txt" onkeyup="ajax:ubicaciongpsBean.buscar()" value="#{ubicaciongpsBean.buscarproducto}" typeahead="true" typeahead-values="#{ubicaciongpsBean.listaproductonombre}"  placeholder="digiteproducto a buscar" update="txt"></b:inputText>
+            <b:commandButton value="Buscar Producto" look="primary" actionListener="#{ubicaciongpsBean.listarproductoenmapa()}" update=":frm"></b:commandButton>
+         <p:blockUI block="form" trigger="txt" />
+        </h:form>
+        
+</h:form>
+        <script>
+          
+       $('.txt').dblclick(function(){
+             $.blockUI.defaults.overlayCSS.opacity=0;
+       });
+  
+  
+  
+</script>         
+        
+
+    </h:body>
+</html>
+
